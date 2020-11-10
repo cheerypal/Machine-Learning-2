@@ -1,6 +1,7 @@
 ./venv
 /venv
 ./idea
+/training_data
 *.csv
 *.arff
 *.swp
