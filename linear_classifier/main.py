@@ -12,7 +12,6 @@ labels = numpy.ravel(labels)
 
 # Always scale the input. The most convenient way is to use a pipeline.
 linear_classifier = make_pipeline(StandardScaler(), SGDClassifier(max_iter=1000, tol=1e-3))
-linear_classifier.fit(training_data, labels)
 label_predictions = cross_val_predict(linear_classifier, training_data, labels, cv=10)
 confusion_matrix = confusion_matrix(labels, label_predictions)
 print(confusion_matrix)
