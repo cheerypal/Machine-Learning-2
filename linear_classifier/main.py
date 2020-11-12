@@ -5,6 +5,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.linear_model import SGDClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
+from sklearn.metrics import accuracy_score
 
 training_data = pandas.read_csv("../training_data/x_train_gr_smpl.csv")
 labels = pandas.read_csv("../training_data/y_train_smpl.csv")
@@ -14,4 +15,7 @@ labels = numpy.ravel(labels)
 linear_classifier = make_pipeline(StandardScaler(), SGDClassifier(max_iter=1000, tol=1e-3))
 label_predictions = cross_val_predict(linear_classifier, training_data, labels, cv=10)
 confusion_matrix = confusion_matrix(labels, label_predictions)
+
+accuracy = accuracy_score(labels, label_predictions)
 print(confusion_matrix)
+print("Accuracy: " + str(accuracy))
