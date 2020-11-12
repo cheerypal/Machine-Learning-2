@@ -1,45 +1,21 @@
-from sklearn import linear_model
-from sklearn.decomposition import PCA
-import numpy
+from sklearn.linear_model import LinearRegression
 import pandas
-from sklearn import svm
-from sklearn.model_selection import KFold
-
-X = pandas.read_csv("../training_data/x_train_gr_smpl.csv")
-y = pandas.read_csv("../training_data/y_train_smpl_0.csv")
-
-X_test = pandas.read_csv("../testing_data/x_test_gr_smpl.csv")
-y_test = pandas.read_csv("../testing_data/y_test_smpl_0.csv")
+import numpy
+from sklearn.model_selection import cross_val_score
 
 
-y = numpy.ravel(y)
-clf = svm.SVC()
-clf.fit(X, y)
-print(clf)
-print(clf.intercept_)
+def display_scores(scores):
+    print("Scores:", scores)
+    print("Mean:", scores.mean())
+    print("Standard deviation:", scores.std())
 
-scores = []
-best_svr = clf # i dont know about this one
-cv = KFold(n_splits=10, random_state=42, shuffle=False)
-for train_index, test_index in cv.split(X):
-    print("Train Index: ", train_index, "\n")
-    print("Test Index: ", test_index)
 
-    X_train, X_test, y_train, y_test = X[train_index], X[test_index], y[train_index], y[test_index]
-    best_svr.fit(X_train, y_train)
-    scores.append(best_svr.score(X_test, y_test))
+linear_classifier = LinearRegression()
 
-best_svr.fit(X, y)
-scores.append(best_svr.score(X_test, y_test))
+training_data = pandas.read_csv("../training_data/x_train_gr_smpl.csv")
+labels = pandas.read_csv("../training_data/y_train_smpl.csv")
 
-print(numpy.mean(scores))
+linear_classifier.fit(training_data, labels)
 
-"""
-x = pandas.read_csv("training_data/x_train_gr_smpl.csv")
-
-pca = PCA(n_components=2)
-principalComponents = pca.fit_transform(x)
-principalDf = pandas.DataFrame(data=principalComponents, columns=['principal component 1', "principal component 2"])
-
-finalDf = pandas.concat([principalDf, y], axis=1)
-"""
+linear_scores = cross_val_score(linear_classifier, training_data, labels, scoring="neg_mean_squared_error", cv=10)
+display_scores(numpy.sqrt(-linear_scores))
