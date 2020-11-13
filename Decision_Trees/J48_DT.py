@@ -12,13 +12,14 @@ data = pd.read_csv("../training_data/x_train_gr_smpl.csv")
 labels = pd.read_csv("../training_data/y_train_smpl.csv")
 X_test = pd.read_csv("../testing_data/x_test_gr_smpl.csv")
 Y_test = pd.read_csv("../testing_data/y_test_smpl.csv")
+y_bin = pd.read_csv("../training_data/y_train_smpl_0.csv")
 
 
 # generate j48 decision tree for various depths and present the accuracy with a confusion matrix
 def decisionTree():
     # Run the J48 tree classifier
     print("\nJ48 Starting ...")
-    tree = sk.DecisionTreeClassifier(max_depth=None, random_state=42)
+    tree = sk.DecisionTreeClassifier(max_depth=6, random_state=42)
     visualiseTree(tree.fit(data, labels))
 
     # Run cross validation to find the mean score and use neg_mean_squared_error
@@ -35,6 +36,13 @@ def decisionTree():
     print("Starting confusion matrix .....")
     cross_pred = cross_val_predict(tree, data, labels, cv=10)
     print("Confusion Matrix:\n", metrics.confusion_matrix(labels, cross_pred))
+    tpr, fpr, thresholds = metrics.roc_curve(y_bin, cross_pred)
+    print("TP Rate : ", tpr)
+    print("FP Rate : ", fpr)
+    print("Thresholds : ", thresholds)
+    print("Precision : ", metrics.precision_score(labels, cross_pred, average='micro'))
+    print("Recall : ", metrics.recall_score(labels, cross_pred, average='micro'))
+    print("F1 Measure : ", metrics.f1_score(labels, cross_pred, average='micro'))
 
     # Get accuracy of the cross validation
     accuracy = accuracy_score(labels, cross_pred)
