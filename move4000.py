@@ -12,7 +12,7 @@ testing_file = pandas.read_csv("testing_data/" + TEST_FILE_NAME)
 
 
 training_file_4000 = training_file[3999:]
-testing_file_4000 = testing_file.append(training_file[:4001])
+testing_file_4000 = testing_file.append(training_file[:4000])
 
-training_file_4000.to_csv("4000_data/" + TRAIN_FILE_NAME + "_4000.csv", header=None, index=False)
-testing_file_4000.to_csv("4000_data/" + TEST_FILE_NAME + "_4000.csv", header=None, index=False)
+training_file_4000.to_csv("4000_data/" + TRAIN_FILE_NAME + "_4000.csv", index=False)
+testing_file_4000.to_csv("4000_data/" + TEST_FILE_NAME + "_4000.csv", index=False)
