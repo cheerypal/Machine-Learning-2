@@ -18,7 +18,7 @@ def decisionTree(tree, visualise, mean_std):
 
     # visualise tree
     if visualise:
-        visualiseTree(DT.fit(data, labels))
+        visualiseTree(DT.fit(data, labels), save=False)
 
     # Run cross validation to find the mean score and use neg_mean_squared_error
     if mean_std:
@@ -74,11 +74,12 @@ def get_TPR_FPR(prediction, fileType, visualise):
 
 
 # visualise tree using matplotlib
-def visualiseTree(tree):
+def visualiseTree(tree, save):
     plt.figure(figsize=(50, 50))
     print("Plotting Tree ....")
     sk.plot_tree(tree, fontsize=16, filled=True)
-    plt.savefig("plots/Decision_Tree_Q1.png")
+    if save:
+        plt.savefig("plots/Decision_Tree_Q1.png")
     plt.show()
 
 
