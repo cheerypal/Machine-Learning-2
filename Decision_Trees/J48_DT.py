@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
-import move4000
 
 # total training data
 data = pd.read_csv("../training_data/x_train_gr_smpl.csv")
@@ -57,8 +56,12 @@ def decisionTree(tree, visualise, mean_std):
 def get_ROC_AREA(prediction, fileType):
     auc_arr = list()
     for i in range(0, 10):
-        auc_arr.append(metrics.roc_auc_score(pd.read_csv("../"+fileType+"ing_data/y_"+fileType+"_smpl_"+str(i)+".csv")
-                                             , prediction))
+        if fileType != "4000" and fileType != "9000":
+            auc_arr.append(metrics.roc_auc_score(pd.read_csv("../" + fileType + "ing_data/y_" + fileType + "_smpl_" +
+                                                             str(i) + ".csv"), prediction))
+        else:
+            auc_arr.append(metrics.roc_auc_score(pd.read_csv("../" + fileType + "_data/y_test_smpl_" +
+                                                             str(i) + ".csv_" + fileType + ".csv"), prediction))
     return pd.DataFrame(data=auc_arr, columns=["ROC Area"])
 
 
@@ -67,12 +70,25 @@ def get_ROC_AREA(prediction, fileType):
 # returns data frame containing the True positive rate and false positive rate for each binary file
 def get_TPR_FPR(prediction, fileType, visualise):
     rates = list()
+
     for i in range(0, 10):
-        fpr, tpr, thresholds = metrics.roc_curve(pd.read_csv("../"+fileType+"ing_data/y_"+fileType+"_smpl_"
-                                                             + str(i) + ".csv"), prediction)
-        rates.append([np.mean(tpr), np.mean(fpr)])
-        if visualise:
-            plot_roc_curve(i, fpr, tpr)
+        if fileType != "4000" and fileType != "9000":
+            fpr, tpr, thresholds = metrics.roc_curve(
+                pd.read_csv("../" + fileType + "ing_data/y_" + fileType + "_smpl_" +
+                            str(i) + ".csv"), prediction)
+
+            rates.append([np.mean(tpr), np.mean(fpr)])
+            if visualise:
+                plot_roc_curve(i, fpr, tpr)
+
+        else:
+            fpr, tpr, thresholds = metrics.roc_curve(pd.read_csv("../" + fileType + "_data/y_test_smpl_" +
+                                                                 str(i) + ".csv_" + fileType + ".csv"), prediction)
+
+            rates.append([np.mean(tpr), np.mean(fpr)])
+            if visualise:
+                plot_roc_curve(i, fpr, tpr)
+
     return pd.DataFrame(data=rates, columns=["Average tpr", "Average fpr"])
 
 
@@ -101,8 +117,8 @@ def plot_roc_curve(label, fpr, tpr):
 
 # Question 3
 # test method for when test data needs to be used.
-def decision_trees_test_data(tree, testData, testLabels, visualise):
-    print("\nTraining and testing data starting .... \n")
+def decision_trees_test_data(tree, testType, testData, testLabels, visualise):
+    print("Starting .... \n")
     decTree = tree.fit(data, labels)
     if visualise:
         visualiseTree(decTree, save=False)
@@ -116,18 +132,31 @@ def decision_trees_test_data(tree, testData, testLabels, visualise):
     print("\n", metrics.classification_report(testLabels, pred))
 
     # get tpr, fpr and ROC area
-    print("\n", get_TPR_FPR(pred, "test", visualise))
-    print("\n", get_ROC_AREA(pred, "test"))
+    print("\n", get_TPR_FPR(pred, fileType=testType, visualise=visualise))
+    print("\n", get_ROC_AREA(pred, fileType=testType))
 
     accuracy = accuracy_score(testLabels, pred)
     print("\nAccuracy: " + str(accuracy))
 
 
 # initialise decision tree classifier
-DT = sk.DecisionTreeClassifier(max_depth=6, random_state=42)
-decisionTree(tree=DT, visualise=False, mean_std=False)
-decision_trees_test_data(DT, testingData, testingLabels, visualise=False)
+DT = sk.DecisionTreeClassifier(max_depth=None, random_state=42)
 
-# create test data sets
-move4000.move4000Data()
+# Question 1
+# decisionTree(tree=DT, visualise=False, mean_std=False)
 
+# Question 3
+print("\nTesting using dataset testing data ....\n")
+decision_trees_test_data(DT, "test", testingData, testingLabels, visualise=False)
+
+# Question 4
+print("\nTesting using 4000 moved testing data ....\n")
+test_4000 = pd.read_csv("../4000_data/x_test_gr_smpl.csv_4000.csv")
+test_labels_4000 = pd.read_csv("../4000_data/y_test_smpl.csv_4000.csv")
+decision_trees_test_data(DT, "4000", test_4000, test_labels_4000, visualise=False)
+
+# Question 5
+print("\nTesting using 9000 moved testing data ....\n")
+test_9000 = pd.read_csv("../9000_data/x_test_gr_smpl.csv_9000.csv")
+test_labels_9000 = pd.read_csv("../9000_data/y_test_smpl.csv_9000.csv")
+decision_trees_test_data(DT, "9000", test_9000, test_labels_9000, visualise=False)

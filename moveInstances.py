@@ -1,10 +1,8 @@
 import pandas
 import os
 
-os.makedirs("4000_data", exist_ok=True)
 
-
-def moveBiggerFiles():
+def moveBiggerFiles(numberOfInstances):
     # CHANGE THESE VARIABLES TO PICK WHAT FILE YOU WANT TO MOVE DATA FROM AND TO
 
     # Move Data
@@ -15,10 +13,11 @@ def moveBiggerFiles():
     testing_file_data = pandas.read_csv("testing_data/" + TEST_FILE_DATA)
 
     # File with new data
-    testing_file_4000 = testing_file_data.append(training_file_data[:4000])
+    testing_file_4000 = testing_file_data.append(training_file_data[:numberOfInstances])
 
     # output to new file
-    testing_file_4000.to_csv("4000_data/" + TEST_FILE_DATA + "_4000.csv", index=False)
+    testing_file_4000.to_csv(str(numberOfInstances)+"_data/" + TEST_FILE_DATA + "_" + str(numberOfInstances) +
+                             ".csv", index=False)
 
     # Move Labels Data
     TRAIN_FILE_LABELS = "y_train_smpl.csv"  # MOVE LABELS FROM THIS FILE
@@ -28,23 +27,31 @@ def moveBiggerFiles():
     testing_file_labels = pandas.read_csv("testing_data/" + TEST_FILE_LABELS)
 
     # File with new data
-    testing_file_4000 = testing_file_labels.append(training_file_labels[:4000])
+    testing_file_4000 = testing_file_labels.append(training_file_labels[:numberOfInstances])
     # output to new file
-    testing_file_4000.to_csv("4000_data/" + TEST_FILE_LABELS + "_4000.csv", index=False)
+    testing_file_4000.to_csv(str(numberOfInstances)+"_data/" + TEST_FILE_LABELS + "_" + str(numberOfInstances) +
+                             ".csv", index=False)
 
 
-def moveBinaryFiles():
+def moveBinaryFiles(numberOfInstances):
     for i in range(0, 10):
         training_file_labels = pandas.read_csv("training_data/y_train_smpl_"+str(i)+".csv")
         testing_file_labels = pandas.read_csv("testing_data/y_test_smpl_"+str(i)+".csv")
 
         # File with new data
-        testing_file_4000 = testing_file_labels.append(training_file_labels[:4000])
+        testing_file_4000 = testing_file_labels.append(training_file_labels[:numberOfInstances])
         # output to new file
-        testing_file_4000.to_csv("4000_data/y_test_smpl_"+str(i)+".csv_4000.csv", index=False)
+        testing_file_4000.to_csv(str(numberOfInstances)+"_data/y_test_smpl_"+str(i)+".csv_" + str(numberOfInstances) +
+                                 ".csv", index=False)
 
 
-def move4000Data():
-    moveBiggerFiles()
-    moveBinaryFiles()
+def moveData(numberOfInstances):
+    os.makedirs(str(numberOfInstances)+"_data", exist_ok=True)
+    moveBiggerFiles(numberOfInstances)
+    moveBinaryFiles(numberOfInstances)
+
+
+# moveData(4000)
+# moveData(9000)
+
 
