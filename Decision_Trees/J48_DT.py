@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
+import move4000
 
 # total training data
 data = pd.read_csv("../training_data/x_train_gr_smpl.csv")
@@ -126,4 +127,7 @@ def decision_trees_test_data(tree, testData, testLabels, visualise):
 DT = sk.DecisionTreeClassifier(max_depth=6, random_state=42)
 decisionTree(tree=DT, visualise=False, mean_std=False)
 decision_trees_test_data(DT, testingData, testingLabels, visualise=False)
+
+# create test data sets
+move4000.move4000Data()
 
