@@ -105,7 +105,7 @@ def plot_roc_curve(label, fpr, tpr):
 def mlp_test_data(clf, testType, testData, testLabels, visualise):
     print("Starting .... \n")
 
-    clf = clf.fit(data, labels["0"])
+    clf.fit(data, labels["0"])
 
     # predicts the labels from the test data given
     pred = clf.predict(testData)

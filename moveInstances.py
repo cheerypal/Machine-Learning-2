@@ -13,11 +13,19 @@ def moveBiggerFiles(numberOfInstances):
     testing_file_data = pandas.read_csv("testing_data/" + TEST_FILE_DATA)
 
     # File with new data
+
+    training_file_4000 = training_file_data[numberOfInstances-1:]
     testing_file_4000 = testing_file_data.append(training_file_data[:numberOfInstances])
 
+
     # output to new file
+    training_file_4000.to_csv(str(numberOfInstances)+"_data/" + TRAIN_FILE_DATA + "" + str(numberOfInstances) +
+    ".csv", index=False)
+
+
     testing_file_4000.to_csv(str(numberOfInstances)+"_data/" + TEST_FILE_DATA + "_" + str(numberOfInstances) +
                              ".csv", index=False)
+
 
     # Move Labels Data
     TRAIN_FILE_LABELS = "y_train_smpl.csv"  # MOVE LABELS FROM THIS FILE
@@ -27,8 +35,13 @@ def moveBiggerFiles(numberOfInstances):
     testing_file_labels = pandas.read_csv("testing_data/" + TEST_FILE_LABELS)
 
     # File with new data
+
+    training_file_4000 = training_file_labels[numberOfInstances-1:]
     testing_file_4000 = testing_file_labels.append(training_file_labels[:numberOfInstances])
     # output to new file
+
+    training_file_4000.to_csv(str(numberOfInstances) + "_data/" + TRAIN_FILE_LABELS + "" + str(numberOfInstances) +
+                              ".csv", index=False)
     testing_file_4000.to_csv(str(numberOfInstances)+"_data/" + TEST_FILE_LABELS + "_" + str(numberOfInstances) +
                              ".csv", index=False)
 
@@ -43,6 +56,7 @@ def moveBinaryFiles(numberOfInstances):
         # output to new file
         testing_file_4000.to_csv(str(numberOfInstances)+"_data/y_test_smpl_"+str(i)+".csv_" + str(numberOfInstances) +
                                  ".csv", index=False)
+
 
 
 def moveData(numberOfInstances):
