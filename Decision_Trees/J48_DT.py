@@ -147,16 +147,16 @@ DT = sk.DecisionTreeClassifier(max_depth=None, random_state=42)
 
 # Question 3
 print("\nTesting using dataset testing data ....\n")
-decision_trees_test_data(DT, "test", testingData, testingLabels, visualise=False)
+decision_trees_test_data(DT, "test", testingData, testingLabels, visualise=True)
 
 # Question 4
 print("\nTesting using 4000 moved testing data ....\n")
 test_4000 = pd.read_csv("../4000_data/x_test_gr_smpl.csv_4000.csv")
 test_labels_4000 = pd.read_csv("../4000_data/y_test_smpl.csv_4000.csv")
-decision_trees_test_data(DT, "4000", test_4000, test_labels_4000, visualise=False)
+# decision_trees_test_data(DT, "4000", test_4000, test_labels_4000, visualise=False)
 
 # Question 5
 print("\nTesting using 9000 moved testing data ....\n")
 test_9000 = pd.read_csv("../9000_data/x_test_gr_smpl.csv_9000.csv")
 test_labels_9000 = pd.read_csv("../9000_data/y_test_smpl.csv_9000.csv")
-decision_trees_test_data(DT, "9000", test_9000, test_labels_9000, visualise=False)
+# decision_trees_test_data(DT, "9000", test_9000, test_labels_9000, visualise=True)

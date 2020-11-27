@@ -51,7 +51,7 @@ def moveData(numberOfInstances):
     moveBinaryFiles(numberOfInstances)
 
 
-# moveData(4000)
-# moveData(9000)
+moveData(4000)
+moveData(9000)
 
 
