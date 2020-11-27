@@ -117,9 +117,9 @@ def plot_roc_curve(label, fpr, tpr):
 
 # Question 3
 # test method for when test data needs to be used.
-def decision_trees_test_data(tree, testType, testData, testLabels, visualise):
+def decision_trees_test_data(tree, testType, train_data, train_labels, testData, testLabels, visualise):
     print("Starting .... \n")
-    decTree = tree.fit(data, labels)
+    decTree = tree.fit(train_data, train_labels)
     if visualise:
         visualiseTree(decTree, save=False)
 
@@ -140,23 +140,27 @@ def decision_trees_test_data(tree, testType, testData, testLabels, visualise):
 
 
 # initialise decision tree classifier
-DT = sk.DecisionTreeClassifier(max_depth=None, random_state=42)
+DT = sk.DecisionTreeClassifier(max_depth=None, max_features=5, random_state=42)
 
 # Question 1
-# decisionTree(tree=DT, visualise=False, mean_std=False)
+#decisionTree(tree=DT, visualise=False, mean_std=False)
 
 # Question 3
 print("\nTesting using dataset testing data ....\n")
-decision_trees_test_data(DT, "test", testingData, testingLabels, visualise=True)
+#decision_trees_test_data(DT, "test", data, labels, testingData, testingLabels, visualise=False)
 
 # Question 4
 print("\nTesting using 4000 moved testing data ....\n")
+train_4000 = pd.read_csv("../4000_data/x_train_gr_smpl.csv4000.csv")
+train_labels_4000 = pd.read_csv("../4000_data/y_train_smpl.csv4000.csv")
 test_4000 = pd.read_csv("../4000_data/x_test_gr_smpl.csv_4000.csv")
 test_labels_4000 = pd.read_csv("../4000_data/y_test_smpl.csv_4000.csv")
-# decision_trees_test_data(DT, "4000", test_4000, test_labels_4000, visualise=False)
+decision_trees_test_data(DT, "4000", data, labels, test_4000, test_labels_4000, visualise=False)
 
 # Question 5
 print("\nTesting using 9000 moved testing data ....\n")
+train_9000 = pd.read_csv("../9000_data/x_train_gr_smpl.csv9000.csv")
+train_labels_9000 = pd.read_csv("../9000_data/y_train_smpl.csv9000.csv")
 test_9000 = pd.read_csv("../9000_data/x_test_gr_smpl.csv_9000.csv")
 test_labels_9000 = pd.read_csv("../9000_data/y_test_smpl.csv_9000.csv")
-# decision_trees_test_data(DT, "9000", test_9000, test_labels_9000, visualise=True)
+decision_trees_test_data(DT, "9000", data, labels, test_9000, test_labels_9000, visualise=False)
