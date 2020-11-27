@@ -13,14 +13,13 @@ testingData = pandas.read_csv("../testing_data/x_test_gr_smpl.csv")
 testingLabels = pandas.read_csv("../testing_data/y_test_smpl.csv")
 
 print("MLP classifier starting")
-clf = MLPClassifier(random_state=1, max_iter=300)
+clf = MLPClassifier(hidden_layer_sizes=(15,), random_state=1, max_iter=100, warm_start=False)
 print("MLP classifier finished")
+
 def start_mlp(clf):
 
-
-
     print("Cross val starting")
-    label_predictions = cross_val_predict(clf, data, numpy.ravel(labels), cv=10)
+    label_predictions = cross_val_predict(clf, data, labels["0"], cv=10)
     print("Cross val finished")
 
     print("Building confusion matrix")
@@ -105,6 +104,8 @@ def plot_roc_curve(label, fpr, tpr):
 # test method for when test data needs to be used.
 def mlp_test_data(clf, testType, testData, testLabels, visualise):
     print("Starting .... \n")
+
+    clf = clf.fit(data, labels["0"])
 
     # predicts the labels from the test data given
     pred = clf.predict(testData)
