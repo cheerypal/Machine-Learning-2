@@ -65,10 +65,10 @@ def visualiseTree(tree, save):
 DT = sk.DecisionTreeClassifier(max_depth=None, max_features=2, random_state=42)
 
 # Question 1
-#decisionTree(tree=DT, visualise=True, mean_std=False)
+decisionTree(tree=DT, visualise=True, mean_std=False)
 
 # Question 2
-#visualiseTree(DT.fit(data, labels), save=False)
+visualiseTree(DT.fit(data, labels), save=False)
 
 # Question 3
 print("\nTesting using dataset testing data ....\n")
