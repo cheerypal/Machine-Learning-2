@@ -4,7 +4,7 @@ import Decision_Trees.TFunctions as tf
 
 
 # Method run the classifier using cross validation and using the testing data supplied and created
-def runJ48(DT, visualise, mean_std, data, labels, testingData, testingLabels):
+def runJ48(DT, visualise, mean_std, data, labels, testingData, testingLabels, save):
     # Question 1
     # Run and get the results of the cross validation used on the classifier
     tf.crossValidation(tree=DT, data=data, labels=labels, visualise=visualise, mean_std=mean_std)
@@ -12,7 +12,7 @@ def runJ48(DT, visualise, mean_std, data, labels, testingData, testingLabels):
     # Question 2
     # Visualise the tree plot
     if visualise:
-        tf.visualiseTree(DT.fit(data, labels), save=False)
+        tf.visualiseTree(DT.fit(data, labels), save=save)
 
     # Question 3
     # Run and get the results of the testing data used on the classifier

@@ -19,13 +19,15 @@ testingLabels = pd.read_csv("../testing_data/y_test_smpl.csv")
 labels = np.ravel(labels)
 
 # Always scale the input. The most convenient way is to use a pipeline.
+# Init classifier
+# Run cross validation on the classifier
 linear_classifier = make_pipeline(StandardScaler(), SGDClassifier(max_iter=500, tol=1e-3))
 label_predictions = cross_val_predict(linear_classifier, data, labels, cv=10)
 confusion_matrix = confusion_matrix(labels, label_predictions)
 
+# Print confusion matrix using the predicted labels
 print(confusion_matrix)
 
-print("Metrics")
 # get precision, recall and f1 measure
 print("\n", metrics.classification_report(labels, label_predictions))
 
@@ -39,11 +41,14 @@ print("\nAccuracy: " + str(accuracy))
 
 
 # Question 3
+# Run and get the results of the testing data used on the classifier
 print("\nTesting using dataset testing data ....\n")
 mt.classifier_tester(linear_classifier, "test", data, labels, testingData, testingLabels, visualise=False)
 
 # Question 4
+# Run and get the results of the newly created 4000 instance moved test and training dataset
 print("\nTesting using 4000 moved testing data ....\n")
+# New dataset files - run moveInstance before running this section
 train_4000 = pd.read_csv("../4000_data/x_train_gr_smpl.csv4000.csv")
 train_labels_4000 = pd.read_csv("../4000_data/y_train_smpl.csv4000.csv")
 test_4000 = pd.read_csv("../4000_data/x_test_gr_smpl.csv_4000.csv")
@@ -53,7 +58,9 @@ mt.classifier_tester(linear_classifier, "4000", train_4000, train_labels_4000, t
                      test_labels_4000, visualise=False)
 
 # Question 5
+# Run and get the results of the newly created 9000 instance moved test and training dataset
 print("\nTesting using 9000 moved testing data ....\n")
+# New dataset files - run moveInstance before running this section
 train_9000 = pd.read_csv("../9000_data/x_train_gr_smpl.csv9000.csv")
 train_labels_9000 = pd.read_csv("../9000_data/y_train_smpl.csv9000.csv")
 test_9000 = pd.read_csv("../9000_data/x_test_gr_smpl.csv_9000.csv")

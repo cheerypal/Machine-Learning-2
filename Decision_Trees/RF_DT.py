@@ -5,7 +5,7 @@ import Metrics as mt
 
 
 # Method run the classifier using cross validation and using the testing data supplied and created
-def runRF(rf_model, visualise, mean_std, data, labels, testingData, testingLabels):
+def runRF(rf_model, visualise, mean_std, data, labels, testingData, testingLabels, save):
     # Question 1
     # Run and get the results of the cross validation used on the classifier
     tf.crossValidation(rf_model, data, labels, visualise=visualise, mean_std=mean_std)
@@ -15,7 +15,7 @@ def runRF(rf_model, visualise, mean_std, data, labels, testingData, testingLabel
     if visualise:
         rf_model.fit(data, labels)
         rf_tree = rf_model.estimators_[0]
-        tf.visualiseTree(rf_tree, save=False)
+        tf.visualiseTree(rf_tree, save=save)
 
     # Question 3
     # Run and get the results of the testing data used on the classifier
