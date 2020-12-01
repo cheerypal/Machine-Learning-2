@@ -22,9 +22,10 @@ def visualiseTree(tree, save):
 # runs the cross validation algorithms on the training data using the tree
 # Inputs : tree - this is the tree classifier used for cross validation
 # Inputs : data, labels - corresponding data and classes of the dataset
-# Inputs : Visualise - this is a boolean param when True it will plot the tree
+# Inputs : Visualise - this is a boolean param when True it will plot the ROC Curves
 # Inputs : mean_std - this is a boolean param when True will print the mean and std of cross validation
 # Outputs : Confusion matrix of cross validation, Precision, Recall, F1-Measure, ROC Curves, ROC Area and Accuracy
+# Outputs : ROC Curves if visualise is True
 def crossValidation(tree, data, labels, visualise, mean_std):
     print("Cross Validation started ....")
 
@@ -45,7 +46,7 @@ def crossValidation(tree, data, labels, visualise, mean_std):
     # get precision, recall and f1 measure
     print("\n", metrics.classification_report(labels, prediction))
 
-    # get tpr, fpr and ROC area
+    # get tpr, fpr and ROC area using the predicted labels
     print("\n", mt.get_TPR_FPR(prediction, "train", visualise))
     print("\n", mt.get_ROC_AREA(prediction, "train"))
 

@@ -119,6 +119,7 @@ def classifier_tester(classifier, testType, train_data, train_labels, testData, 
     print("\n", get_TPR_FPR(pred, fileType=testType, visualise=visualise))
     print("\n", get_ROC_AREA(pred, fileType=testType))
 
+    # Get Accuracy
     accuracy = metrics.accuracy_score(testLabels, pred)
     print("\nAccuracy: " + str(accuracy))
 
