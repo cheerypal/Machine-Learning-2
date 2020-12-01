@@ -101,7 +101,7 @@ def plot_roc_curve(label, fpr, tpr):
 #          '9000' for testing using the test files that have 9000 extra instances
 # Inputs : train_data, train_labels, testData, testLabels : these are the data files used in testing
 # Inputs : Visualise - this is a boolean param when True it will plot the ROC curve
-# Outputs : Precision, Recall, F1-Measure, ROC Curves, ROC Area and Accuracy
+# Outputs : Confusion matrix, Precision, Recall, F1-Measure, ROC Curves, ROC Area and Accuracy
 def classifier_tester(classifier, testType, train_data, train_labels, testData, testLabels, visualise):
     print("Starting .... \n")
     # Fit training data in the classifier

@@ -6,7 +6,10 @@ import numpy as np
 import Metrics as mt
 
 
-# visualise tree using matplotlib
+# visualise tree using tree.plot_tree
+# Inputs : tree - tree to be visualised - RandomForrest and DecisionTree
+# Inputs : save - boolean for saving the file in the file structure
+# Outputs : Plot of the tree
 def visualiseTree(tree, save):
     plt.figure(figsize=(50, 50))
     print("\nPlotting Tree ....")
@@ -16,6 +19,12 @@ def visualiseTree(tree, save):
     plt.show()
 
 
+# runs the cross validation algorithms on the training data using the tree
+# Inputs : tree - this is the tree classifier used for cross validation
+# Inputs : data, labels - corresponding data and classes of the dataset
+# Inputs : Visualise - this is a boolean param when True it will plot the tree
+# Inputs : mean_std - this is a boolean param when True will print the mean and std of cross validation
+# Outputs : Confusion matrix of cross validation, Precision, Recall, F1-Measure, ROC Curves, ROC Area and Accuracy
 def crossValidation(tree, data, labels, visualise, mean_std):
     print("Cross Validation started ....")
 
