@@ -104,6 +104,7 @@ def plot_roc_curve(label, fpr, tpr):
 # Outputs : Precision, Recall, F1-Measure, ROC Curves, ROC Area and Accuracy
 def classifier_tester(classifier, testType, train_data, train_labels, testData, testLabels, visualise):
     print("Starting .... \n")
+    # Fit training data in the classifier
     classifier.fit(train_data, train_labels)
 
     # predicts the labels from the test data given
@@ -114,7 +115,7 @@ def classifier_tester(classifier, testType, train_data, train_labels, testData, 
     print("\n")
     print("\n", metrics.classification_report(testLabels, pred))
 
-    # get tpr, fpr and ROC area
+    # get tpr, fpr and ROC area using the predicted labels
     print("\n", get_TPR_FPR(pred, fileType=testType, visualise=visualise))
     print("\n", get_ROC_AREA(pred, fileType=testType))
 
