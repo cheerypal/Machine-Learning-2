@@ -17,10 +17,10 @@ testingLabels = pd.read_csv("../testing_data/y_test_smpl.csv")
 DT = sk.DecisionTreeClassifier(max_depth=None, max_features=2, random_state=42)
 # run J48 decision tree
 print("\nRunning J48 ....\n")
-J48_DT.runJ48(DT, visualise=True, data=data, labels=labels, testingData=testingData, testingLabels=testingLabels)
+J48_DT.runJ48(DT, visualise=False, data=data, labels=labels, testingData=testingData, testingLabels=testingLabels)
 
 # Random Forrest
-rf_model = RandomForestClassifier(max_depth=None, max_features=2, random_state=1)
+rf_model = RandomForestClassifier(max_depth=None, max_features=2, random_state=42)
 # run RF decision tree
 print("\nRunning Random Forrest Classifier ....\n")
 labels = np.ravel(labels)
