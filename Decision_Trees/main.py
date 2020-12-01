@@ -24,5 +24,5 @@ rf_model = RandomForestClassifier(max_depth=None, max_features=2, random_state=1
 # run RF decision tree
 print("\nRunning Random Forrest Classifier ....\n")
 labels = np.ravel(labels)
-RF_DT.runRF(rf_model, visualise=False, labels=labels, testingData=testingData, testingLabels=testingLabels)
+RF_DT.runRF(rf_model, visualise=False, data=data, labels=labels, testingData=testingData, testingLabels=testingLabels)
 
