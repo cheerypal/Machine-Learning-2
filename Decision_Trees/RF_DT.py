@@ -1,39 +1,45 @@
-from sklearn import tree as sk
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_score, cross_val_predict
-from sklearn import metrics
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from sklearn.metrics import accuracy_score
+import Decision_Trees.TFunctions as tf
+import Metrics as mt
 
 # loading datasets from the csv files
-data = pd.read_csv("./x_train_gr_smpl.csv")
-labels = pd.read_csv("./y_train_smpl.csv")
-y_bin = pd.read_csv("./y_train_smpl_0.csv")
+data = pd.read_csv("../training_data/x_train_gr_smpl.csv")
+labels = pd.read_csv("../training_data/y_train_smpl.csv")
+testingData = pd.read_csv("../testing_data/x_test_gr_smpl.csv")
+testingLabels = pd.read_csv("../testing_data/y_test_smpl.csv")
+labels = np.ravel(labels)
 
-def randomForestClassifier():
-    #initializaing Random forest classifier
-    rf_model = RandomForestClassifier(random_state=1)
-    print("Getting cross_validation score with kfold 10")
-    rf_cross_score = cross_val_score(rf_model, data, labels["0"], scoring="neg_mean_squared_error", cv=10)
+# initializing Random forest classifier
+rf_model = RandomForestClassifier(max_depth=None, max_features=2, random_state=1)
 
-    # Building confusion matrix for rf using cross validation predition
-    print("Getting predictions with cross validation prediction method")
-    cross_pred = cross_val_predict(rf_model, data, labels["0"], cv=10)
-    print("Confusion Matrix:\n", metrics.confusion_matrix(labels["0"], cross_pred))
+# Question 1
+tf.crossValidation(rf_model, data, labels, visualise=False, mean_std=False)
 
-    print("Printing Different accuracy measures for Analyzing Random Forest")
-    print("Mean accuracy score - Random Forest: ", rf_cross_score.mean())
-    print("ROC_AREA : ", metrics.roc_auc_score(y_bin, cross_pred))
-    tpr, fpr, thresholds = metrics.roc_curve(y_bin, cross_pred)
-    print("TP Rate : ", tpr)
-    print("FP Rate : ", fpr)
-    print("Thresholds : ", thresholds)
-    print("Precision : ", metrics.precision_score(labels["0"], cross_pred, average='micro'))
-    print("Recall : ", metrics.recall_score(labels["0"], cross_pred, average='micro'))
-    print("F1 Measure : ", metrics.f1_score(labels["0"], cross_pred, average='micro'))
+# Question 2
+rf_model.fit(data, labels)
+rf_tree = rf_model.estimators_[0]
+tf.visualiseTree(rf_tree, save=False)
 
-    accuracy = accuracy_score(labels["0"], cross_pred)
-    print("Cross validation Accuracy: " + str(accuracy))
-randomForestClassifier()
+# Question 3
+print("\nTesting using a dataset testing data ....\n")
+mt.classifier_tester(rf_model, "test", data, labels, testingData, testingLabels, visualise=False)
+
+# Question 4
+print("\nTesting using 4000 moved testing data ....\n")
+train_4000 = pd.read_csv("../4000_data/x_train_gr_smpl.csv4000.csv")
+train_labels_4000 = pd.read_csv("../4000_data/y_train_smpl.csv4000.csv")
+test_4000 = pd.read_csv("../4000_data/x_test_gr_smpl.csv_4000.csv")
+test_labels_4000 = pd.read_csv("../4000_data/y_test_smpl.csv_4000.csv")
+train_labels_4000 = np.ravel(train_labels_4000)
+mt.classifier_tester(rf_model, "4000", train_4000, train_labels_4000, test_4000, test_labels_4000, visualise=False)
+
+# Question 5
+print("\nTesting using 9000 moved testing data ....\n")
+train_9000 = pd.read_csv("../9000_data/x_train_gr_smpl.csv9000.csv")
+train_labels_9000 = pd.read_csv("../9000_data/y_train_smpl.csv9000.csv")
+test_9000 = pd.read_csv("../9000_data/x_test_gr_smpl.csv_9000.csv")
+test_labels_9000 = pd.read_csv("../9000_data/y_test_smpl.csv_9000.csv")
+train_labels_9000 = np.ravel(train_labels_9000)
+mt.classifier_tester(rf_model, "9000", train_9000, train_labels_9000, test_9000, test_labels_9000, visualise=False)

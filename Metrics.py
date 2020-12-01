@@ -10,12 +10,14 @@ import matplotlib.pyplot as plt
 def get_ROC_AREA(prediction, fileType):
     auc_arr = list()
     for i in range(0, 10):
+        bin_pred = (prediction == i)
+        bin_pred = [not value for value in bin_pred]
         if fileType != "4000" and fileType != "9000":
             auc_arr.append(metrics.roc_auc_score(pd.read_csv("../" + fileType + "ing_data/y_" + fileType + "_smpl_" +
-                                                             str(i) + ".csv"), prediction))
+                                                             str(i) + ".csv"), bin_pred))
         else:
             auc_arr.append(metrics.roc_auc_score(pd.read_csv("../" + fileType + "_data/y_test_smpl_" +
-                                                             str(i) + ".csv_" + fileType + ".csv"), prediction))
+                                                             str(i) + ".csv_" + fileType + ".csv"), bin_pred))
     return pd.DataFrame(data=auc_arr, columns=["ROC Area"])
 
 
@@ -24,24 +26,24 @@ def get_ROC_AREA(prediction, fileType):
 # returns data frame containing the True positive rate and false positive rate for each binary file
 def get_TPR_FPR(prediction, fileType, visualise):
     rates = list()
-
     for i in range(0, 10):
+        bin_pred = (prediction == i)
+        bin_pred = [not value for value in bin_pred]
         if fileType != "4000" and fileType != "9000":
             fpr, tpr, thresholds = metrics.roc_curve(
                 pd.read_csv("../" + fileType + "ing_data/y_" + fileType + "_smpl_" +
-                            str(i) + ".csv"), prediction)
+                            str(i) + ".csv"), bin_pred)
 
             rates.append([np.mean(tpr), np.mean(fpr)])
-            if visualise:
-                plot_roc_curve(i, fpr, tpr)
 
         else:
             fpr, tpr, thresholds = metrics.roc_curve(pd.read_csv("../" + fileType + "_data/y_test_smpl_" +
-                                                                 str(i) + ".csv_" + fileType + ".csv"), prediction)
+                                                                 str(i) + ".csv_" + fileType + ".csv"), bin_pred)
 
             rates.append([np.mean(tpr), np.mean(fpr)])
-            if visualise:
-                plot_roc_curve(i, fpr, tpr)
+
+        if visualise:
+            plot_roc_curve(i, fpr, tpr)
 
     return pd.DataFrame(data=rates, columns=["Average tpr", "Average fpr"])
 
