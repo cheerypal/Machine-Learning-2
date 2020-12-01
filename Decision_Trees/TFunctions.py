@@ -9,7 +9,7 @@ import Metrics as mt
 # visualise tree using matplotlib
 def visualiseTree(tree, save):
     plt.figure(figsize=(50, 50))
-    print("Plotting Tree ....")
+    print("\nPlotting Tree ....")
     sk.plot_tree(tree, fontsize=16, filled=True)
     if save:
         plt.savefig("plots/Decision_Tree_Q1.png")
