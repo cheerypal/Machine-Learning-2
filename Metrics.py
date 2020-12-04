@@ -44,6 +44,9 @@ def get_ROC_AREA(prediction, fileType):
 # Outputs : Dataframe containing the Average TPR and FPR for each class
 # Outputs : ROC curve plot if Visualise is True
 def get_TPR_FPR(prediction, fileType, visualise):
+    plt.title("ROC Visualisation")
+    plt.xlabel("False Positive Rate")
+    plt.ylabel("True Positive Rate")
     rates = list()
     # Loop for all 10 files.
     for i in range(0, 10):
@@ -70,23 +73,16 @@ def get_TPR_FPR(prediction, fileType, visualise):
 
         # plot chart if true  of the ROC curve
         if visualise:
-            plot_roc_curve(i, fpr, tpr)
+            plt.plot(fpr, tpr, label="Class " + str(i))
+
+    plt.legend()
+    plt.show()
 
     # Return Dataframe contain average tpr and fpr
     return pd.DataFrame(data=rates, columns=["Average tpr", "Average fpr"])
 
 
-# plots ROC curve given FPR and TPR values
-def plot_roc_curve(label, fpr, tpr):
-    title = "Rate for class " + str(label)
-    plt.figure(figsize=(8, 6))
-    plt.plot(fpr, tpr)
-    plt.axis([0, 1, 0, 1])
-    plt.xlabel("False Positive Rate")
-    plt.ylabel("True Positive Rate")
-    plt.suptitle(title)
-    plt.grid(True)
-    plt.show()
+
 
 
 # Question 3
