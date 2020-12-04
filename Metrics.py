@@ -74,6 +74,7 @@ def get_TPR_FPR(prediction, fileType, visualise):
         # plot chart if true  of the ROC curve
         if visualise:
             plt.plot(fpr, tpr, label="Class " + str(i))
+
     if visualise:
         plt.legend()
         plt.show()
