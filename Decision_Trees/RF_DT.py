@@ -5,14 +5,14 @@ import Metrics as mt
 
 
 # Method run the classifier using cross validation and using the testing data supplied and created
-def runRF(rf_model, visualise, mean_std, data, labels, testingData, testingLabels, save):
+def runRF(rf_model, vis_tree, visualise, mean_std, data, labels, testingData, testingLabels, save):
     # Question 1
     # Run and get the results of the cross validation used on the classifier
     tf.crossValidation(rf_model, data, labels, visualise=visualise, mean_std=mean_std)
 
     # Question 2
     # Visualise the tree plot
-    if visualise:
+    if vis_tree:
         rf_model.fit(data, labels)
         rf_tree = rf_model.estimators_[0]
         tf.visualiseTree(rf_tree, save=save)

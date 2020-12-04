@@ -1,0 +1,525 @@
+C:\Users\euang\AppData\Local\Programs\Python\Python38\python.exe C:/Users/euang/Documents/Year4/supervised-amaan-learning/Decision_Trees/main.py
+
+Running J48 ....
+
+Cross Validation started ....
+Start confusion matrix ....
+Confusion Matrix:
+ [[   0  150   29    1   24    0    3    0    0    3]
+ [   6 1006  585  183  327    6   33    0   45   29]
+ [   4  657  696  294  519    4   25   12   21   18]
+ [   0  157  274  499  388    2   77    0    9    4]
+ [   0  365  518  360  642    8   40    2   30   15]
+ [   0   20   70   28   50    0    5    0   15   22]
+ [   0   81   77   61   87    0   35    0   19    0]
+ [   0   22   92   51   33    0   11    4   11   16]
+ [   1  156  155   70   60    3   17    0   59   19]
+ [   0   66   63   12   42    3   10    0   30   44]]
+
+               precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00       210
+           1       0.38      0.45      0.41      2220
+           2       0.27      0.31      0.29      2250
+           3       0.32      0.35      0.34      1410
+           4       0.30      0.32      0.31      1980
+           5       0.00      0.00      0.00       210
+           6       0.14      0.10      0.11       360
+           7       0.22      0.02      0.03       240
+           8       0.25      0.11      0.15       540
+           9       0.26      0.16      0.20       270
+
+    accuracy                           0.31      9690
+   macro avg       0.21      0.18      0.18      9690
+weighted avg       0.29      0.31      0.29      9690
+
+
+    Average tpr  Average fpr
+0     0.666280     0.666667
+1     0.591968     0.515616
+2     0.583199     0.563556
+3     0.623994     0.548700
+4     0.600519     0.558586
+5     0.665752     0.666667
+6     0.658771     0.634259
+7     0.666173     0.661111
+8     0.660109     0.630247
+9     0.662208     0.612346
+
+    ROC Area
+0  0.499420
+1  0.614528
+2  0.529465
+3  0.612941
+4  0.562899
+5  0.498629
+6  0.536768
+7  0.507593
+8  0.544794
+9  0.574794
+
+Accuracy: 0.3080495356037152
+
+Plotting Tree ....
+
+Testing using dataset testing data ....
+
+Starting ....
+
+Starting Confusion Matrix ....
+
+Confusion Matrix
+ [[  0  17  22   0  20   0   0   0   1   0]
+ [  0 283 274  29 116   0   3   5   4   6]
+ [  0 160 235  77 233   0  22   6   7  10]
+ [  0 100 119 104 103   0  10   0   4  10]
+ [  0  99  69 130 308   0  26  16   4   8]
+ [  0   5  15   3  31   0   0   0   5   1]
+ [  0  32  39   2   4   0   0   0   9   4]
+ [  0   3   1   8  16   0  10   0   3  19]
+ [  0  63  35  16  11   0  18   0   4   3]
+ [  0  24  36   5   9   0   0   1   3  12]]
+
+
+
+               precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00        60
+           1       0.36      0.39      0.38       720
+           2       0.28      0.31      0.29       750
+           3       0.28      0.23      0.25       450
+           4       0.36      0.47      0.41       660
+           5       0.00      0.00      0.00        60
+           6       0.00      0.00      0.00        90
+           7       0.00      0.00      0.00        60
+           8       0.09      0.03      0.04       150
+           9       0.16      0.13      0.15        90
+
+    accuracy                           0.31      3090
+   macro avg       0.15      0.16      0.15      3090
+weighted avg       0.28      0.31      0.29      3090
+
+C:\Users\euang\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\metrics\_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+    Average tpr  Average fpr
+0     0.500000     0.500000
+1     0.595921     0.535648
+2     0.579772     0.562222
+3     0.632576     0.589630
+4     0.592181     0.511111
+5     0.500000     0.500000
+6     0.656778     0.666667
+7     0.663586     0.666667
+8     0.662132     0.657778
+9     0.659889     0.622222
+
+    ROC Area
+0  0.500000
+1  0.590410
+2  0.526325
+3  0.564419
+4  0.621605
+5  0.500000
+6  0.485167
+7  0.495380
+8  0.506531
+9  0.556500
+
+Accuracy: 0.3061488673139159
+
+Testing using 4000 moved testing data ....
+
+Starting ....
+
+Starting Confusion Matrix ....
+
+Confusion Matrix
+ [[  0  49  63  11  26   0   0   0   0   0]
+ [  0 596 603 103 351   0   0   0   0   0]
+ [  0 568 677  64 352   0   0   0   0   0]
+ [  0 359 406  37 231   0   0   0   0   0]
+ [  0 562 518  47 350   0   0   0   0   0]
+ [  0  48  46   7  45   0   0   0   0   0]
+ [  0  66  80  14  79   0   0   0   0   0]
+ [  0  42  75   5  39   0   0   0   0   0]
+ [  0 127 137  21  78   0   0   0   0   0]
+ [  0  51  70  26  61   0   0   0   0   0]]
+
+
+C:\Users\euang\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\metrics\_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+               precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00       149
+           1       0.24      0.36      0.29      1653
+           2       0.25      0.41      0.31      1661
+           3       0.11      0.04      0.05      1033
+           4       0.22      0.24      0.23      1477
+           5       0.00      0.00      0.00       146
+           6       0.00      0.00      0.00       239
+           7       0.00      0.00      0.00       161
+           8       0.00      0.00      0.00       363
+           9       0.00      0.00      0.00       208
+
+    accuracy                           0.23      7090
+   macro avg       0.08      0.10      0.09      7090
+weighted avg       0.18      0.23      0.20      7090
+
+
+    Average tpr  Average fpr
+0     0.500000     0.500000
+1     0.552056     0.545984
+2     0.541913     0.537634
+3     0.650014     0.656260
+4     0.591819     0.587355
+5     0.500000     0.500000
+6     0.500000     0.500000
+7     0.500000     0.500000
+8     0.500000     0.500000
+9     0.500000     0.500000
+
+    ROC Area
+0  0.500000
+1  0.509109
+2  0.506418
+3  0.490630
+4  0.506696
+5  0.500000
+6  0.500000
+7  0.500000
+8  0.500000
+9  0.500000
+
+Accuracy: 0.23413258110014104
+
+Testing using 9000 moved testing data ....
+
+Starting ....
+
+Starting Confusion Matrix ....
+
+Confusion Matrix
+ [[   0  154   64   32    0    0    0    0    0    0]
+ [   0 1496  512  769    0    0    0    0    0    0]
+ [   0 1818  537  495    0    0    0    0    0    0]
+ [   0 1108  341  309    0    0    0    0    0    0]
+ [   0 1639  419  451    0    0    0    0    0    0]
+ [   0  164   41   43    0    0    0    0    0    0]
+ [   0  267   84   78    0    0    0    0    0    0]
+ [   0  192   48   42    0    0    0    0    0    0]
+ [   0  377  108  170    0    0    0    0    0    0]
+ [   0  161   69  102    0    0    0    0    0    0]]
+
+
+C:\Users\euang\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\metrics\_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+               precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00       250
+           1       0.20      0.54      0.29      2777
+           2       0.24      0.19      0.21      2850
+           3       0.12      0.18      0.15      1758
+           4       0.00      0.00      0.00      2509
+           5       0.00      0.00      0.00       248
+           6       0.00      0.00      0.00       429
+           7       0.00      0.00      0.00       282
+           8       0.00      0.00      0.00       655
+           9       0.00      0.00      0.00       332
+
+    accuracy                           0.19     12090
+   macro avg       0.06      0.09      0.07     12090
+weighted avg       0.12      0.19      0.14     12090
+
+
+    Average tpr  Average fpr
+0     0.500000     0.500000
+1     0.457499     0.482594
+2     0.605711     0.604277
+3     0.596466     0.606959
+4     0.500000     0.500000
+5     0.500000     0.500000
+6     0.500000     0.500000
+7     0.500000     0.500000
+8     0.500000     0.500000
+9     0.500000     0.500000
+
+    ROC Area
+0  0.500000
+1  0.462358
+2  0.502150
+3  0.484259
+4  0.500000
+5  0.500000
+6  0.500000
+7  0.500000
+8  0.500000
+9  0.500000
+
+Accuracy: 0.1937138130686518
+
+Running Random Forrest Classifier ....
+
+Cross Validation started ....
+Start confusion matrix ....
+Confusion Matrix:
+ [[   0  203    7    0    0    0    0    0    0    0]
+ [   0 1264  721  114  121    0    0    0    0    0]
+ [   0  775  990  279  206    0    0    0    0    0]
+ [   0  198  313  580  319    0    0    0    0    0]
+ [   0  365  634  374  607    0    0    0    0    0]
+ [   0   31  115   20   44    0    0    0    0    0]
+ [   0   95   51   98  112    0    4    0    0    0]
+ [   0   61  114   56    9    0    0    0    0    0]
+ [   0  230  193   81   36    0    0    0    0    0]
+ [   0   72  170   23    5    0    0    0    0    0]]
+C:\Users\euang\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\metrics\_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+               precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00       210
+           1       0.38      0.57      0.46      2220
+           2       0.30      0.44      0.36      2250
+           3       0.36      0.41      0.38      1410
+           4       0.42      0.31      0.35      1980
+           5       0.00      0.00      0.00       210
+           6       1.00      0.01      0.02       360
+           7       0.00      0.00      0.00       240
+           8       0.00      0.00      0.00       540
+           9       0.00      0.00      0.00       270
+
+    accuracy                           0.36      9690
+   macro avg       0.25      0.17      0.16      9690
+weighted avg       0.33      0.36      0.32      9690
+
+
+    Average tpr  Average fpr
+0     0.500000     0.500000
+1     0.576082     0.476877
+2     0.562814     0.520000
+3     0.624597     0.529551
+4     0.629831     0.564478
+5     0.500000     0.500000
+6     0.666667     0.662963
+7     0.500000     0.500000
+8     0.500000     0.500000
+9     0.500000     0.500000
+
+    ROC Area
+0  0.500000
+1  0.648808
+2  0.564220
+3  0.642570
+4  0.598030
+5  0.500000
+6  0.505556
+7  0.500000
+8  0.500000
+9  0.500000
+
+Accuracy: 0.35552115583075333
+
+Plotting Tree ....
+
+Testing using a dataset testing data ....
+
+Starting ....
+
+Starting Confusion Matrix ....
+
+Confusion Matrix
+ [[  0  35  25   0   0   0   0   0   0   0]
+ [  0 416 250  31  23   0   0   0   0   0]
+ [  0 204 255 221  70   0   0   0   0   0]
+ [  0 111 146 151  42   0   0   0   0   0]
+ [  0 169 112  80 299   0   0   0   0   0]
+ [  0   0  30   0  30   0   0   0   0   0]
+ [  0  25  58   7   0   0   0   0   0   0]
+ [  0  11  19   0  30   0   0   0   0   0]
+ [  0  84  18  41   7   0   0   0   0   0]
+ [  0  41  49   0   0   0   0   0   0   0]]
+
+
+C:\Users\euang\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\metrics\_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+               precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00        60
+           1       0.38      0.58      0.46       720
+           2       0.27      0.34      0.30       750
+           3       0.28      0.34      0.31       450
+           4       0.60      0.45      0.52       660
+           5       0.00      0.00      0.00        60
+           6       0.00      0.00      0.00        90
+           7       0.00      0.00      0.00        60
+           8       0.00      0.00      0.00       150
+           9       0.00      0.00      0.00        90
+
+    accuracy                           0.36      3090
+   macro avg       0.15      0.17      0.16      3090
+weighted avg       0.32      0.36      0.33      3090
+
+
+    Average tpr  Average fpr
+0     0.500000     0.500000
+1     0.571027     0.474074
+2     0.565954     0.553333
+3     0.618687     0.554815
+4     0.638957     0.515657
+5     0.500000     0.500000
+6     0.500000     0.500000
+7     0.500000     0.500000
+8     0.500000     0.500000
+9     0.500000     0.500000
+
+    ROC Area
+0  0.500000
+1  0.645429
+2  0.518932
+3  0.595808
+4  0.684951
+5  0.500000
+6  0.500000
+7  0.500000
+8  0.500000
+9  0.500000
+
+Accuracy: 0.3627831715210356
+
+Testing using 4000 moved testing data ....
+
+Starting ....
+
+Starting Confusion Matrix ....
+
+Confusion Matrix
+ [[   0   74   72    0    3    0    0    0    0    0]
+ [   0  688  939    0   26    0    0    0    0    0]
+ [   0  543 1094    0   24    0    0    0    0    0]
+ [   0  266  740    0   27    0    0    0    0    0]
+ [   0  461  988    0   28    0    0    0    0    0]
+ [   0   24  119    0    3    0    0    0    0    0]
+ [   0   61  169    0    9    0    0    0    0    0]
+ [   0   44  116    0    1    0    0    0    0    0]
+ [   0  135  225    0    3    0    0    0    0    0]
+ [   0   85  117    0    6    0    0    0    0    0]]
+
+
+C:\Users\euang\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\metrics\_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+               precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00       149
+           1       0.29      0.42      0.34      1653
+           2       0.24      0.66      0.35      1661
+           3       0.00      0.00      0.00      1033
+           4       0.22      0.02      0.03      1477
+           5       0.00      0.00      0.00       146
+           6       0.00      0.00      0.00       239
+           7       0.00      0.00      0.00       161
+           8       0.00      0.00      0.00       363
+           9       0.00      0.00      0.00       208
+
+    accuracy                           0.26      7090
+   macro avg       0.07      0.11      0.07      7090
+weighted avg       0.17      0.26      0.17      7090
+
+
+    Average tpr  Average fpr
+0     0.500000     0.500000
+1     0.563781     0.525100
+2     0.453225     0.445440
+3     0.500000     0.500000
+4     0.660712     0.659964
+5     0.500000     0.500000
+6     0.500000     0.500000
+7     0.500000     0.500000
+8     0.500000     0.500000
+9     0.500000     0.500000
+
+    ROC Area
+0  0.500000
+1  0.558022
+2  0.511677
+3  0.500000
+4  0.501122
+5  0.500000
+6  0.500000
+7  0.500000
+8  0.500000
+9  0.500000
+
+Accuracy: 0.2552891396332863
+
+Testing using 9000 moved testing data ....
+
+Starting ....
+
+Starting Confusion Matrix ....
+
+Confusion Matrix
+ [[   0  222   28    0    0    0    0    0    0    0]
+ [   0 2568  209    0    0    0    0    0    0    0]
+ [   0 2631  219    0    0    0    0    0    0    0]
+ [   0 1574  184    0    0    0    0    0    0    0]
+ [   0 2286  223    0    0    0    0    0    0    0]
+ [   0  226   22    0    0    0    0    0    0    0]
+ [   0  399   30    0    0    0    0    0    0    0]
+ [   0  263   19    0    0    0    0    0    0    0]
+ [   0  603   52    0    0    0    0    0    0    0]
+ [   0  310   22    0    0    0    0    0    0    0]]
+
+
+C:\Users\euang\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\metrics\_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+               precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00       250
+           1       0.23      0.92      0.37      2777
+           2       0.22      0.08      0.11      2850
+           3       0.00      0.00      0.00      1758
+           4       0.00      0.00      0.00      2509
+           5       0.00      0.00      0.00       248
+           6       0.00      0.00      0.00       429
+           7       0.00      0.00      0.00       282
+           8       0.00      0.00      0.00       655
+           9       0.00      0.00      0.00       332
+
+    accuracy                           0.23     12090
+   macro avg       0.04      0.10      0.05     12090
+weighted avg       0.10      0.23      0.11     12090
+
+
+    Average tpr  Average fpr
+0     0.500000     0.500000
+1     0.362026     0.358131
+2     0.637322     0.643980
+3     0.500000     0.500000
+4     0.500000     0.500000
+5     0.500000     0.500000
+6     0.500000     0.500000
+7     0.500000     0.500000
+8     0.500000     0.500000
+9     0.500000     0.500000
+
+    ROC Area
+0  0.500000
+1  0.505843
+2  0.490013
+3  0.500000
+4  0.500000
+5  0.500000
+6  0.500000
+7  0.500000
+8  0.500000
+9  0.500000
+
+Accuracy: 0.2305210918114144
+
+Process finished with exit code 0

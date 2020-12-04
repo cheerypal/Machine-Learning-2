@@ -15,7 +15,7 @@ labels = np.ravel(labels)
 
 print("MLP classifier starting")
 # Init classifier
-clf = MLPClassifier(max_iter=500, tol=1e-3)
+clf = MLPClassifier(max_iter=500, random_state=1)
 print("MLP classifier finished")
 
 # Run cross validation on the classifier
