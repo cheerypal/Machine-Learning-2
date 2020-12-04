@@ -74,9 +74,9 @@ def get_TPR_FPR(prediction, fileType, visualise):
         # plot chart if true  of the ROC curve
         if visualise:
             plt.plot(fpr, tpr, label="Class " + str(i))
-
-    plt.legend()
-    plt.show()
+    if visualise:
+        plt.legend()
+        plt.show()
 
     # Return Dataframe contain average tpr and fpr
     return pd.DataFrame(data=rates, columns=["Average tpr", "Average fpr"])
