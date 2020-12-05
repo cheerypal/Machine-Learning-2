@@ -8,6 +8,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.metrics import accuracy_score
 import Metrics as mt
 from sklearn import metrics
+import matplotlib.pyplot as plt
 
 
 # total training data
@@ -31,9 +32,22 @@ print(confusion_matrix)
 # get precision, recall and f1 measure
 print("\n", metrics.classification_report(labels, label_predictions))
 
-# get tpr, fpr and ROC area
-print("\n", mt.get_TPR_FPR(label_predictions, "train", visualise=True))
-print("\n", mt.get_ROC_AREA(label_predictions, "train"))
+auc_arr = []
+for i in range(0, 10):
+    # gets cross val probability of the class
+    file = np.ravel(pd.read_csv("../training_data/y_train_smpl_" + str(i) + ".csv"))
+    print("ROC class: ", i)
+    # get ROC values and TPR, FPR for ROC curve
+    probs = cross_val_predict(linear_classifier, data, file, method="predict_proba", cv=10)
+    fpr, tpr, thresholds = metrics.roc_curve(file, probs[:, 1])
+    auc_arr.append(metrics.roc_auc_score(file, probs[:, 1]))
+    plt.plot(fpr, tpr, label="Class " + str(i))
+
+plt.title("ROC Visualisation")
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.legend()
+plt.show()
 
 # Get accuracy of the cross validation
 accuracy = accuracy_score(labels, label_predictions)

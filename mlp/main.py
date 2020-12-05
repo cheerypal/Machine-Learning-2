@@ -5,6 +5,7 @@ from sklearn import metrics
 import numpy as np
 import pandas as pd
 import Metrics as mt
+import matplotlib.pyplot as plt
 
 # total training data
 data = pd.read_csv("../training_data/x_train_gr_smpl.csv")
@@ -27,10 +28,22 @@ print(confusion_matrix)
 
 # get precision, recall and f1 measure
 print("\n", metrics.classification_report(labels, label_predictions))
+auc_arr = []
+for i in range(0, 10):
+    # gets cross val probability of the class
+    file = np.ravel(pd.read_csv("../training_data/y_train_smpl_" + str(i) + ".csv"))
+    print("ROC class: ", i)
+    # get ROC values and TPR, FPR for ROC curve
+    probs = cross_val_predict(clf, data, file, method="predict_proba", cv=10)
+    fpr, tpr, thresholds = metrics.roc_curve(file, probs[:, 1])
+    auc_arr.append(metrics.roc_auc_score(file, probs[:, 1]))
+    plt.plot(fpr, tpr, label="Class " + str(i))
 
-# get tpr, fpr and ROC area
-print("\n", mt.get_TPR_FPR(label_predictions, "train", visualise=True))
-print("\n", mt.get_ROC_AREA(label_predictions, "train"))
+plt.title("ROC Visualisation")
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.legend()
+plt.show()
 
 # Get accuracy of the cross validation
 accuracy = accuracy_score(labels, label_predictions)
@@ -40,7 +53,7 @@ print("\nAccuracy: " + str(accuracy))
 # Question 3
 # Run and get the results of the testing data used on the classifier
 print("\nTesting using dataset testing data ....\n")
-mt.classifier_tester(clf, "test", data, labels, testingData, testingLabels, visualise=False)
+mt.classifier_tester(clf, "test", data, labels, testingData, testingLabels, visualise=True)
 
 # Question 4
 # Run and get the results of the newly created 4000 instance moved test and training dataset
@@ -52,7 +65,7 @@ test_4000 = pd.read_csv("../4000_data/x_test_gr_smpl.csv_4000.csv")
 test_labels_4000 = pd.read_csv("../4000_data/y_test_smpl.csv_4000.csv")
 train_labels_4000 = np.ravel(train_labels_4000)
 mt.classifier_tester(clf, "4000", train_4000, train_labels_4000, test_4000,
-                     test_labels_4000, visualise=False)
+                     test_labels_4000, visualise=True)
 
 # Question 5
 # Run and get the results of the newly created 9000 instance moved test and training dataset
@@ -64,7 +77,7 @@ test_9000 = pd.read_csv("../9000_data/x_test_gr_smpl.csv_9000.csv")
 test_labels_9000 = pd.read_csv("../9000_data/y_test_smpl.csv_9000.csv")
 train_labels_9000 = np.ravel(train_labels_9000)
 mt.classifier_tester(clf, "9000", train_9000, train_labels_9000, test_9000,
-                     test_labels_9000, visualise=False)
+                     test_labels_9000, visualise=True)
 
 
 

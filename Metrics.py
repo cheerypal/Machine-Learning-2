@@ -17,18 +17,18 @@ def get_ROC_AREA(prediction, fileType):
     # loop through all 10 files
     for i in range(0, 10):
         # convert prediction into a boolean list
-        bin_pred = (prediction == i)
+        #bin_pred = (prediction == i)
         # invert the list so that it matches the provided files
-        bin_pred = [not value for value in bin_pred]
+        # = [not value for value in bin_pred]
         # only access when 4000/9000 instance data is being used.
         if fileType != "4000" and fileType != "9000":
             auc_arr.append(metrics.roc_auc_score(pd.read_csv("../" + fileType + "ing_data/y_" + fileType + "_smpl_" +
-                                                             str(i) + ".csv"), bin_pred))
+                                                             str(i) + ".csv"), prediction))
         else:
 
             # generate Area under curve using the file and binary predictions.
             auc_arr.append(metrics.roc_auc_score(pd.read_csv("../" + fileType + "_data/y_test_smpl_" +
-                                                             str(i) + ".csv_" + fileType + ".csv"), bin_pred))
+                                                             str(i) + ".csv_" + fileType + ".csv"), prediction))
     # return dataframe with roc results.
     return pd.DataFrame(data=auc_arr, columns=["ROC Area"])
 
@@ -50,15 +50,11 @@ def get_TPR_FPR(prediction, fileType, visualise):
     rates = list()
     # Loop for all 10 files.
     for i in range(0, 10):
-        # convert prediction into a boolean list
-        bin_pred = (prediction == i)
-        # invert the list so that it matches the provided files
-        bin_pred = [not value for value in bin_pred]
         # only access when 4000/9000 instance data is being used.
         if fileType != "4000" and fileType != "9000":
             fpr, tpr, thresholds = metrics.roc_curve(
                 pd.read_csv("../" + fileType + "ing_data/y_" + fileType + "_smpl_" +
-                            str(i) + ".csv"), bin_pred)
+                            str(i) + ".csv"), prediction)
 
             # append mean rates to rate array
             rates.append([np.mean(tpr), np.mean(fpr)])
@@ -67,7 +63,7 @@ def get_TPR_FPR(prediction, fileType, visualise):
 
             # generate tpr, fpr using the test file and the binary prediction list
             fpr, tpr, thresholds = metrics.roc_curve(pd.read_csv("../" + fileType + "_data/y_test_smpl_" +
-                                                                 str(i) + ".csv_" + fileType + ".csv"), bin_pred)
+                                                                 str(i) + ".csv_" + fileType + ".csv"), prediction)
 
             rates.append([np.mean(tpr), np.mean(fpr)])
 
@@ -81,9 +77,6 @@ def get_TPR_FPR(prediction, fileType, visualise):
 
     # Return Dataframe contain average tpr and fpr
     return pd.DataFrame(data=rates, columns=["Average tpr", "Average fpr"])
-
-
-
 
 
 # Question 3
@@ -106,6 +99,8 @@ def classifier_tester(classifier, testType, train_data, train_labels, testData, 
 
     # predicts the labels from the test data given
     pred = classifier.predict(testData)
+    # gets probabilities for the classes
+    probs = classifier.predict_proba(testData)
     print("Starting Confusion Matrix ....")
     # plots confusion matrix between testingLabels and the predicted labels
     print("\nConfusion Matrix\n", metrics.confusion_matrix(testLabels, pred))
@@ -113,8 +108,8 @@ def classifier_tester(classifier, testType, train_data, train_labels, testData, 
     print("\n", metrics.classification_report(testLabels, pred))
 
     # get tpr, fpr and ROC area using the predicted labels
-    print("\n", get_TPR_FPR(pred, fileType=testType, visualise=visualise))
-    print("\n", get_ROC_AREA(pred, fileType=testType))
+    print("\n", get_TPR_FPR(probs[:,1], fileType=testType, visualise=visualise))
+    print("\n", get_ROC_AREA(probs[:,1], fileType=testType))
 
     # Get Accuracy
     accuracy = metrics.accuracy_score(testLabels, pred)
