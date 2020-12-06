@@ -32,6 +32,8 @@ print(confusion_matrix)
 # get precision, recall and f1 measure
 print("\n", metrics.classification_report(labels, label_predictions))
 
+"""
+# ROC Calculation for the Linear Classifier - this does not work unfortunately
 auc_arr = []
 for i in range(0, 10):
     # gets cross val probability of the class
@@ -48,6 +50,7 @@ plt.xlabel("False Positive Rate")
 plt.ylabel("True Positive Rate")
 plt.legend()
 plt.show()
+"""
 
 # Get accuracy of the cross validation
 accuracy = accuracy_score(labels, label_predictions)

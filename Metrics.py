@@ -99,7 +99,7 @@ def classifier_tester(classifier, testType, train_data, train_labels, testData, 
 
     # predicts the labels from the test data given
     pred = classifier.predict(testData)
-    # gets probabilities for the classes
+    # gets probabilities for the classes - ROC metric
     probs = classifier.predict_proba(testData)
     print("Starting Confusion Matrix ....")
     # plots confusion matrix between testingLabels and the predicted labels

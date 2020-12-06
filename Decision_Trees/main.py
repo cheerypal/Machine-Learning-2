@@ -17,7 +17,7 @@ testingLabels = pd.read_csv("../testing_data/y_test_smpl.csv")
 DT = sk.DecisionTreeClassifier(max_depth=None, random_state=42)
 # run J48 decision tree
 print("\nRunning J48 ....\n")
-J48_DT.runJ48(DT, crossVal=False, vis_tree=False, visualise=True, mean_std=False, data=data, labels=labels,
+J48_DT.runJ48(DT, crossVal=False, vis_tree=False, visualise=False, mean_std=False, data=data, labels=labels,
               testingData=testingData, testingLabels=testingLabels, save=False)
 
 # =================================== Random Forrest ====================================
@@ -25,6 +25,6 @@ rf_model = RandomForestClassifier(max_depth=None, random_state=42)
 # run RF tree
 print("\nRunning Random Forrest Classifier ....\n")
 labels = np.ravel(labels)
-RF_DT.runRF(rf_model, crossVal=False, vis_tree=False, visualise=True, mean_std=False, data=data, labels=labels,
+RF_DT.runRF(rf_model, crossVal=False, vis_tree=False, visualise=False, mean_std=False, data=data, labels=labels,
             testingData=testingData, testingLabels=testingLabels, save=False)
 

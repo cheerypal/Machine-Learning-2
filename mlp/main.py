@@ -29,8 +29,8 @@ print(confusion_matrix)
 # get precision, recall and f1 measure
 print("\n", metrics.classification_report(labels, label_predictions))
 auc_arr = []
-for i in range(0, 10):
-    # gets cross val probability of the class
+for i in range(0, 5):
+    # gets cross val probability of the class - ROC Metric
     file = np.ravel(pd.read_csv("../training_data/y_train_smpl_" + str(i) + ".csv"))
     print("ROC class: ", i)
     # get ROC values and TPR, FPR for ROC curve
